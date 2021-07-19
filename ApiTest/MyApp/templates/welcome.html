@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试平台</title>
+
+	<!--awesome font include-->
+        <link type="text/css" rel="stylesheet" href="/static/201908059658/assets/css/font-awesome.min.css" />
+        <!--include plugin css-->
+        <link type="text/css" rel="stylesheet" href="/static/201908059658/src/jquery-rvnm.css" />
+
+         <link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+
+        <link rel="shortcut icon" href="/static/bitbug_favicon.ico">
+
+    <style>
+        .chamfer{
+            background: linear-gradient(41deg, transparent 10px, #66defd 0) top left,
+                    linear-gradient(-90deg, transparent 0px, #adfdee 0) top right,
+                    linear-gradient(-90deg, transparent 0px, #cbffbd 0) bottom right,
+                    linear-gradient(45deg, transparent 21px, #b0fde2 0) bottom left;
+            background-size: 49% 48%;
+            background-repeat: no-repeat;
+
+        }
+    </style>
+<body>
+
+
+<nav id="navbar" class="">
+    <div style="color: white;margin-top: 10px;margin-bottom: 5px;text-align: center">
+
+        欢迎你：<span>{{ username }}</span> &nbsp;<a href="/logout/"  style="color: #8697b5;text-decoration: none"> 退出 </a>
+        <br>
+        <img id="img_1" src=""  alt="" style="width: 50%" class="img-circle img-thumbnail">
+        <script>
+            document.getElementById('img_1').src = '/static/user_img/{{ userimg }}';
+        </script>
+        <a href="javascript:show_upload()" class="glyphicon glyphicon-pencil" ></a>
+    </div>
+
+
+     <form  style="display: none" id="upload_file" action="/user_upload/" method="post" enctype="multipart/form-data">
+        <input type="file" name="fileUpload" style="margin-left: 45px;width: 65px;height: 20px;font-size: xx-small;float: left"/>
+        <button onclick="upload_py()"  style="color: black;width: 64px;height: 21px;font-size: xx-small" > 上传头像 </button>
+    </form>
+
+    <script>
+        function show_upload(){
+            document.getElementById('upload_file').style.display = 'block';
+        }
+    </script>
+    <ul>
+            <li>
+                <a href="/project_list/">
+                    项目列表
+                </a>
+            </li>
+
+
+            <li>
+                <a href="#">
+                    小工具
+                </a>
+                <ul>
+                    <li>
+                        <a href="/tools_zhengjiao/">
+                            正交生成器
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li>
+                <a href="/help/">
+                    帮助
+                </a>
+            </li>
+            <li>
+                <a href="/admin/" target="_blank">
+                    后台
+                </a>
+            </li>
+    </ul>
+</nav>
+
+<button id="menu_btn" onclick="display_menu()" style="
+position: absolute;left: 188px;top: 48%;z-index: 999;height: 35px;
+background-color: #353c48;color: white;border: 0;font-size: x-large;text-decoration: none"><</button>
+
+<script>
+    function display_menu() {
+        menu = document.getElementById('navbar');
+        btn = document.getElementById('menu_btn');
+        if( btn.innerText == '<' ){
+            menu.style.display = 'none';
+            btn.style.left = '0px';
+            btn.innerText = '>';
+        }else{
+            menu.style.display = 'block';
+            btn.style.left = '188px';
+            btn.innerText = '<';
+        }
+    }
+</script>
+
+
+<div class="chamfer" style="height: 30px;width: 100px;position: fixed;right: 0px;top: 0px ">
+    <strong>
+        <a href="/home/" style="font-size: large;padding-left: 30px;color: #00372e;text-decoration: none"> HOME </a>
+    </strong>
+</div>
+
+
+<br>
+
+<script src="/static/201908059658/js/jquery-1.11.0.min.js" type="text/javascript"></script>
+
+<script src="/static/bootstrap-3.3.7-dist/js/bootstrap.min.js" type="text/javascript"></script>
+
+<!--include plugin js-->
+<script type="text/javascript" src="/static/201908059658/src/jquery-rvnm.js"></script>
+<!--js run code-->
+<script type="text/javascript">
+    $(function () {
+        var rvnMenu = $("#navbar").rvnm({
+//                    mode: 'mobile',
+//                    responsive: false,
+            searchable: false,
+            theme: 'dark-lesb'
+        });
+        console.log(rvnMenu);
+//                rvnMenu.setMode('minimal');
+        rvnMenu.setTheme('dark-ruby');
+    });
+</script>
+
+
+
+
+<div id="page1" ></div>
+
+<script>
+$('#page1').load('/child/'+'{{ whichHTML }}/{{ oid }}/{{ ooid }}/')
+</script>
+
+
+<script>
+    if( "{{ whichHTML }}" != 'Home.html' ){
+        document.getElementById('menu_btn').click();
+    }
+
+</script>
+
+</body>
+</html>
+
+
