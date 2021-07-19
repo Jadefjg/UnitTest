@@ -1,0 +1,4 @@
+ddt~=1.4.2
+pytest~=6.2.3
+nose2~=0.10.0
+parameterized~=0.8.1
